@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demoformbs.mapper.PersonMapper">
+
+
+    <resultMap type="com.example.demoformbs.model.Person" id="cardAndPerson2">
+        <id property="id" column="id" jdbcType="INTEGER"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="age" column="age" jdbcType="INTEGER"/>
+        <result property="idcard_id" column="idcard_id" jdbcType="INTEGER"/>
+        <!-- 一对一级联查询-->
+        <association property="idCard" javaType="com.example.demoformbs.model.IDCard" column="idcard">
+            <id property="id" column="id" jdbcType="INTEGER"/>
+            <result property="code" column="code" jdbcType="VARCHAR"/>
+        </association>
+    </resultMap>
+
+    <select id="selectPersonById2" parameterType="java.lang.Integer" resultMap= "cardAndPerson2">
+        select p.*,ic.code
+        from person p, idcard ic
+        where p.idcard_id=ic.id and p.id=#{id}
+    </select>
+
+    <!-- 一对一根据id查询个人信息：连接查询（使用POJO存储结果）-->
+    <select id="selectPersonById3" parameterType="java.lang.Integer" resultType= "com.example.demoformbs.mapper.SelectPersonById">
+        select p.*,ic.code
+        from person p, idcard ic
+        where p.idcard_id = ic.id and p.id=#{id}
+    </select>
+</mapper>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demoformbs.mapper.IDCardMapper">
+
+    <sql id="ID_Card_List" >
+        id, code
+    </sql>
+
+    <select id="selectCodeById" parameterType="java.lang.Integer" resultType= "com.example.demoformbs.model.IDCard">
+        select
+        <include refid="ID_Card_List"/>
+         from idcard
+         where id=#{id}
+    </select>
+
+    <insert id="insert" parameterType="com.example.demoformbs.model.IDCard">
+        insert idcard
+       	VALUES
+       		(#{id}, #{code})
+    </insert>
+
+    <update id="update" parameterType="com.example.demoformbs.model.IDCard" >
+        UPDATE
+        idcard
+        SET
+        <if test="code != null">code = #{code},</if>
+        WHERE
+        id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="java.lang.Integer" >
+       DELETE FROM
+       		 idcard
+       WHERE
+       		 id =#{id}
+    </delete>
+
+</mapper>

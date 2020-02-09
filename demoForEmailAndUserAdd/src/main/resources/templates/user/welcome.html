@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>welcome</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}"></link>
+</head>
+<body class="container">
+<h2>欢迎来到这个网站，请选择服务</h2>
+
+<div class="form-group">
+    <div class="col-sm-2 control-label">
+        <a href="/list" th:href="@{/list}" class="btn btn-info">添加/删改用户</a>
+    </div>
+</div>
+
+<div class="form-group">
+    <div class="col-sm-2 control-label">
+        <a href="/toEmail" th:href="@{/toEmail}" class="btn btn-info">发送邮件</a>
+    </div>
+</div>
+</body>
+</html>
